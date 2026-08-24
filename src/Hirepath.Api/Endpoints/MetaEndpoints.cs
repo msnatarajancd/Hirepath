@@ -10,11 +10,11 @@ public static class MetaEndpoints
     {
         var group = app.MapGroup("/api").WithTags("Meta");
 
-        group.MapGet("/health", () => Results.Ok(new HealthResponse("ok")))
+        group.MapGet("/health", () => TypedResults.Ok(new HealthResponse("ok")))
             .WithName("GetHealth")
             .WithSummary("Liveness probe.");
 
-        group.MapGet("/app-info", () => Results.Ok(new AppInfoResponse(
+        group.MapGet("/app-info", () => TypedResults.Ok(new AppInfoResponse(
                 Name: "Hirepath",
                 Version: "0.1.0",
                 Phase: "Phase 0 — Foundation")))

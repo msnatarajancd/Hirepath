@@ -1,0 +1,35 @@
+{
+  "runtime": "Net100",
+  "documentGenerator": {
+    "fromDocument": {
+      "url": "../Hirepath.Api/Hirepath.Api.json"
+    }
+  },
+  "codeGenerators": {
+    "openApiToTypeScriptClient": {
+      "className": "{controller}Client",
+      "moduleName": "",
+      "namespace": "",
+      "typeScriptVersion": 5.4,
+      "template": "Angular",
+      "httpClass": "HttpClient",
+      "withCredentials": false,
+      "useSingletonProvider": true,
+      "injectionTokenType": "InjectionToken",
+      "rxJsVersion": 7.8,
+      "dateTimeType": "Date",
+      "nullValue": "undefined",
+      "generateClientClasses": true,
+      "generateClientInterfaces": true,
+      "generateOptionalParameters": true,
+      "typeStyle": "Interface",
+      "enumStyle": "StringLiteral",
+      "useTransformOptionsMethod": false,
+      "markOptionalProperties": true,
+      "generateConstructorInterface": true,
+      "convertConstructorInterfaceData": true,
+      "baseUrlTokenName": "API_BASE_URL",
+      "output": "src/app/core/api/hirepath-api.client.ts"
+    }
+  }
+}

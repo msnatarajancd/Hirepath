@@ -1,0 +1,114 @@
+/*
+ * Hirepath design tokens — the single source of truth for colour, type,
+ * spacing, radius, and shadow. Every component reads these; nothing hardcodes
+ * a colour. Dark is the default; light is complete. Colours are in oklch.
+ *
+ * Semantic vars live on :root (dark) and :root[data-theme="light"]. Tailwind
+ * utilities map to them via `@theme inline` so `bg-surface`, `text-accent`,
+ * etc. follow the active theme automatically.
+ */
+
+:root {
+  color-scheme: dark;
+
+  /* Neutral base — near-black, cool. */
+  --bg: oklch(0.17 0.01 260);
+  --surface: oklch(0.21 0.012 260);
+  --surface-2: oklch(0.25 0.014 260);
+  --surface-3: oklch(0.29 0.016 260);
+  --border: oklch(0.32 0.016 260);
+  --border-strong: oklch(0.42 0.02 260);
+
+  --text: oklch(0.96 0.005 260);
+  --text-muted: oklch(0.72 0.012 260);
+  --text-faint: oklch(0.55 0.012 260);
+
+  /* One confident accent. */
+  --accent: oklch(0.68 0.16 255);
+  --accent-hover: oklch(0.73 0.16 255);
+  --accent-contrast: oklch(0.17 0.01 260);
+  --accent-soft: oklch(0.3 0.06 255);
+
+  /* Semantic ramp. */
+  --success: oklch(0.72 0.15 155);
+  --warning: oklch(0.8 0.15 85);
+  --danger: oklch(0.66 0.19 25);
+  --info: oklch(0.72 0.13 235);
+
+  /* Radius scale. */
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+  --radius-xl: 22px;
+  --radius-full: 999px;
+
+  /* Shadows — soft, low-contrast for a calm feel. */
+  --shadow-sm: 0 1px 2px oklch(0 0 0 / 0.3);
+  --shadow-md: 0 4px 16px oklch(0 0 0 / 0.35);
+  --shadow-lg: 0 12px 40px oklch(0 0 0 / 0.45);
+
+  /* Type. */
+  --font-sans: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, 'SFMono-Regular', 'Menlo', monospace;
+}
+
+:root[data-theme='light'] {
+  color-scheme: light;
+
+  --bg: oklch(0.99 0.003 260);
+  --surface: oklch(1 0 0);
+  --surface-2: oklch(0.97 0.004 260);
+  --surface-3: oklch(0.94 0.006 260);
+  --border: oklch(0.9 0.006 260);
+  --border-strong: oklch(0.82 0.01 260);
+
+  --text: oklch(0.24 0.015 260);
+  --text-muted: oklch(0.46 0.014 260);
+  --text-faint: oklch(0.62 0.012 260);
+
+  --accent: oklch(0.55 0.17 255);
+  --accent-hover: oklch(0.5 0.17 255);
+  --accent-contrast: oklch(0.99 0 0);
+  --accent-soft: oklch(0.9 0.05 255);
+
+  --success: oklch(0.6 0.15 155);
+  --warning: oklch(0.7 0.15 85);
+  --danger: oklch(0.58 0.2 25);
+  --info: oklch(0.6 0.13 235);
+
+  --shadow-sm: 0 1px 2px oklch(0 0 0 / 0.06);
+  --shadow-md: 0 4px 16px oklch(0 0 0 / 0.08);
+  --shadow-lg: 0 12px 40px oklch(0 0 0 / 0.12);
+}
+
+/* Map semantic vars into Tailwind's theme so utilities track the active theme. */
+@theme inline {
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-surface-3: var(--surface-3);
+  --color-border: var(--border);
+  --color-border-strong: var(--border-strong);
+
+  --color-text: var(--text);
+  --color-text-muted: var(--text-muted);
+  --color-text-faint: var(--text-faint);
+
+  --color-accent: var(--accent);
+  --color-accent-hover: var(--accent-hover);
+  --color-accent-contrast: var(--accent-contrast);
+  --color-accent-soft: var(--accent-soft);
+
+  --color-success: var(--success);
+  --color-warning: var(--warning);
+  --color-danger: var(--danger);
+  --color-info: var(--info);
+
+  --radius-sm: var(--radius-sm);
+  --radius-md: var(--radius-md);
+  --radius-lg: var(--radius-lg);
+  --radius-xl: var(--radius-xl);
+
+  --font-sans: var(--font-sans);
+  --font-mono: var(--font-mono);
+}

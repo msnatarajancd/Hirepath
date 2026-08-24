@@ -1,0 +1,52 @@
+<div class="chat">
+  <div class="chat__scroll">
+    <div class="welcome">
+      <div class="welcome__badge">
+        <app-icon name="conversion_path" [size]="30" />
+      </div>
+      <h1 class="welcome__title">Let's find your fit.</h1>
+      <p class="welcome__subtitle">
+        Paste a job description, or drop your resume in. I'll tell you how well you match, where the
+        gaps are, and how to close them — then we can talk it through.
+      </p>
+
+      <div class="chips">
+        @for (s of suggestions; track s.text) {
+          <button type="button" class="chip" (click)="useSuggestion(s.text)">
+            <app-icon [name]="s.icon" [size]="18" />
+            <span>{{ s.text }}</span>
+          </button>
+        }
+      </div>
+
+      <button type="button" class="preview-link" (click)="previewCanvas()">
+        <app-icon name="preview" [size]="16" />
+        Preview the canvas panel
+      </button>
+    </div>
+  </div>
+
+  <!-- Composer: the fast lane. -->
+  <form class="composer" (ngSubmit)="send()">
+    <button type="button" class="composer__attach" aria-label="Attach a resume">
+      <app-icon name="attach_file" [size]="20" />
+    </button>
+    <input
+      class="composer__input"
+      type="text"
+      name="draft"
+      [(ngModel)]="draft"
+      placeholder="Message Hirepath, or paste a job description…"
+      aria-label="Message Hirepath"
+      autocomplete="off"
+    />
+    <button
+      type="submit"
+      class="composer__send"
+      [disabled]="draft().trim().length === 0"
+      aria-label="Send"
+    >
+      <app-icon name="arrow_upward" [size]="20" />
+    </button>
+  </form>
+</div>

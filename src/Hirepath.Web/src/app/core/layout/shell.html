@@ -1,0 +1,63 @@
+<div class="shell">
+  <!-- Escape-hatch navigation: slim icon rail. Chat is the main road. -->
+  <nav class="rail" aria-label="Primary">
+    <a class="rail__brand" routerLink="/chat" aria-label="Hirepath home">
+      <app-icon name="conversion_path" [size]="26" />
+    </a>
+
+    <ul class="rail__items">
+      @for (item of nav; track item.link) {
+        <li>
+          <a
+            [routerLink]="item.link"
+            routerLinkActive="is-active"
+            class="rail__item"
+            [attr.aria-label]="item.label"
+            [title]="item.label"
+          >
+            <app-icon [name]="item.icon" />
+          </a>
+        </li>
+      }
+    </ul>
+
+    <button
+      type="button"
+      class="rail__item rail__theme"
+      (click)="theme.toggle()"
+      [attr.aria-label]="
+        theme.theme() === 'dark' ? 'Switch to light theme' : 'Switch to dark theme'
+      "
+      [title]="theme.theme() === 'dark' ? 'Light theme' : 'Dark theme'"
+    >
+      <app-icon [name]="theme.theme() === 'dark' ? 'light_mode' : 'dark_mode'" />
+    </button>
+  </nav>
+
+  <!-- Conversation column: the primary surface. -->
+  <main class="stage" [class.stage--split]="canvas.isOpen()">
+    <section class="conversation" aria-label="Conversation">
+      <router-outlet />
+    </section>
+
+    <!-- Canvas panel: deep work lives here. -->
+    @if (canvas.isOpen()) {
+      <aside class="canvas" aria-label="Canvas">
+        <header class="canvas__head">
+          <h2 class="canvas__title">{{ canvas.title() }}</h2>
+          <button
+            type="button"
+            class="canvas__close"
+            (click)="canvas.close()"
+            aria-label="Close canvas"
+          >
+            <app-icon name="close" [size]="20" />
+          </button>
+        </header>
+        <div class="canvas__body">
+          <p class="text-text-faint">Detailed views open here.</p>
+        </div>
+      </aside>
+    }
+  </main>
+</div>

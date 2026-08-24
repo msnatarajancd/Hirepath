@@ -1,0 +1,157 @@
+.shell {
+  display: grid;
+  grid-template-columns: 60px 1fr;
+  height: 100vh;
+  height: 100dvh;
+  overflow: hidden;
+  background: var(--bg);
+}
+
+/* --- Icon rail ---------------------------------------------------------- */
+.rail {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 14px 0;
+  border-right: 1px solid var(--border);
+  background: var(--surface);
+}
+
+.rail__brand {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  margin-bottom: 10px;
+  color: var(--accent);
+  border-radius: var(--radius-md);
+}
+
+.rail__items {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  flex: 1;
+}
+
+.rail__item {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  color: var(--text-muted);
+  border: none;
+  background: transparent;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition:
+    background 140ms ease,
+    color 140ms ease;
+
+  &:hover {
+    color: var(--text);
+    background: var(--surface-2);
+  }
+
+  &.is-active {
+    color: var(--accent);
+    background: var(--accent-soft);
+  }
+}
+
+.rail__theme {
+  margin-top: auto;
+}
+
+/* --- Stage: conversation + canvas -------------------------------------- */
+.stage {
+  display: grid;
+  grid-template-columns: 1fr;
+  min-width: 0;
+  height: 100%;
+  overflow: hidden;
+}
+
+.stage--split {
+  grid-template-columns: minmax(0, 1fr) minmax(0, 0.85fr);
+}
+
+.conversation {
+  min-width: 0;
+  height: 100%;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.canvas {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  height: 100%;
+  border-left: 1px solid var(--border);
+  background: var(--surface);
+}
+
+.canvas__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--border);
+}
+
+.canvas__title {
+  font-size: 15px;
+  font-weight: 600;
+  margin: 0;
+}
+
+.canvas__close {
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  color: var(--text-muted);
+  background: transparent;
+  border: none;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+
+  &:hover {
+    color: var(--text);
+    background: var(--surface-2);
+  }
+}
+
+.canvas__body {
+  flex: 1;
+  padding: 20px;
+  overflow-y: auto;
+}
+
+/* --- Mobile: full-width conversation, canvas as a sheet, no rail -------- */
+@media (max-width: 767px) {
+  .shell {
+    grid-template-columns: 1fr;
+  }
+
+  .rail {
+    display: none;
+  }
+
+  .stage--split {
+    grid-template-columns: 1fr;
+  }
+
+  .canvas {
+    position: fixed;
+    inset: 0;
+    z-index: 40;
+    border-left: none;
+  }
+}
