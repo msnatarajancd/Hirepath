@@ -1,0 +1,13 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/Hirepath.Api/Hirepath.Api.csproj" />
+    <Project Path="src/Hirepath.Application/Hirepath.Application.csproj" />
+    <Project Path="src/Hirepath.Domain/Hirepath.Domain.csproj" />
+    <Project Path="src/Hirepath.Infrastructure/Hirepath.Infrastructure.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/Hirepath.Api.Tests/Hirepath.Api.Tests.csproj" />
+    <Project Path="tests/Hirepath.Application.Tests/Hirepath.Application.Tests.csproj" />
+    <Project Path="tests/Hirepath.Domain.Tests/Hirepath.Domain.Tests.csproj" />
+  </Folder>
+</Solution>

@@ -18,6 +18,14 @@ indent_size = 2
 [*.md]
 trim_trailing_whitespace = false
 
+# EF Core-generated migrations are machine-written; don't hold them to our
+# hand-written style/analyzer rules (they still compile and are reviewed on add).
+[**/Migrations/*.cs]
+generated_code = true
+dotnet_analyzer_diagnostic.severity = none
+dotnet_diagnostic.IDE0161.severity = none
+dotnet_diagnostic.CA1861.severity = none
+
 # ---------------------------------------------------------------------------
 # C# style (mirrors "boring and readable" — standard .NET conventions)
 # ---------------------------------------------------------------------------
@@ -54,6 +62,18 @@ dotnet_style_require_accessibility_modifiers = for_non_interface_members:warning
 csharp_using_directive_placement = outside_namespace:warning
 dotnet_sort_system_directives_first = true
 
+# CA1707: underscored test method names (Given_When_Then) are the .NET testing
+# convention and read far better than PascalCase for specs. Handled per-folder
+# below, but declared here too for editors that don't match the tests glob.
+
+# CA1716: "Resume" collides with a VB reserved word. Resume is core domain
+# vocabulary and this app is never consumed from VB — the rule adds no value here.
+dotnet_diagnostic.CA1716.severity = none
+
+# CA1515: public types in the API assembly are intentionally public (it is the
+# composition root and test entry point), not an inadvertently-exposed internal.
+dotnet_diagnostic.CA1515.severity = none
+
 # Naming: interfaces start with I, async methods end with Async, etc. (defaults)
 dotnet_naming_rule.interfaces_should_be_prefixed_with_i.severity = warning
 dotnet_naming_rule.interfaces_should_be_prefixed_with_i.symbols = interface_symbols
@@ -61,3 +81,9 @@ dotnet_naming_rule.interfaces_should_be_prefixed_with_i.style = i_prefix_style
 dotnet_naming_symbols.interface_symbols.applicable_kinds = interface
 dotnet_naming_style.i_prefix_style.required_prefix = I
 dotnet_naming_style.i_prefix_style.capitalization = pascal_case
+
+# Test projects: allow underscored test names and relax a few rules that fight
+# idiomatic test code.
+[tests/**/*.cs]
+dotnet_diagnostic.CA1707.severity = none
+dotnet_diagnostic.CA1515.severity = none

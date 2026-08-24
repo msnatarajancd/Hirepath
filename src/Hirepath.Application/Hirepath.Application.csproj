@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!-- Application: use cases, DTOs, IChatClient orchestration, tool definitions. -->
+
+  <ItemGroup>
+    <ProjectReference Include="..\Hirepath.Domain\Hirepath.Domain.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.AI" />
+  </ItemGroup>
+
+</Project>

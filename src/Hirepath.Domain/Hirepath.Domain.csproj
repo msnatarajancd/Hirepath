@@ -1,0 +1,5 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!-- Domain: entities, value objects, pure scoring logic. References NOTHING. -->
+
+</Project>
