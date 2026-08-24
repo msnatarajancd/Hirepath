@@ -9,7 +9,14 @@ var builder = WebApplication.CreateBuilder(args);
 // --- Services -------------------------------------------------------------
 builder.Services.AddApplication();
 builder.Services.AddInfrastructure(builder.Configuration);
-builder.Services.AddOpenApi();
+
+// Serialize enums as strings on the wire, so the API and the generated client
+// speak "Anthropic", not 1. Also makes the OpenAPI enums self-describing.
+builder.Services.ConfigureHttpJsonOptions(options =>
+    options.SerializerOptions.Converters.Add(
+        new System.Text.Json.Serialization.JsonStringEnumConverter()));
+builder.Services.AddOpenApi(options =>
+    options.AddSchemaTransformer<Hirepath.Api.OpenApi.FormFileSchemaTransformer>());
 
 const string DevCorsPolicy = "hirepath-dev";
 var allowedOrigins = builder.Configuration.GetSection("Hirepath:Cors:AllowedOrigins")

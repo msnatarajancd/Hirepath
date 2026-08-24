@@ -30,6 +30,7 @@ export class Shell {
     { icon: 'forum', label: 'Chat', link: '/chat' },
     { icon: 'insights', label: 'Analyses', link: '/analyses' },
     { icon: 'description', label: 'Resumes', link: '/resumes' },
+    { icon: 'work', label: 'Jobs', link: '/jobs' },
     { icon: 'settings', label: 'Settings', link: '/settings' },
   ];
 }

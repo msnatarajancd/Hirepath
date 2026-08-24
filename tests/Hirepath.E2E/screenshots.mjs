@@ -18,7 +18,8 @@ const widths = [
 ];
 const routes = [
   { name: 'chat', path: '/chat' },
-  { name: 'analyses', path: '/analyses' },
+  { name: 'resumes', path: '/resumes' },
+  { name: 'jobs', path: '/jobs' },
   { name: 'settings', path: '/settings' },
 ];
 const themes = ['dark', 'light'];

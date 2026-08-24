@@ -1,0 +1,139 @@
+<div class="page">
+  <header class="page__head">
+    <h1 class="page__title">Settings</h1>
+    <p class="page__subtitle">
+      Choose your AI provider and how Hirepath behaves. Your API key is stored only on this machine,
+      in your local database — never sent anywhere but the provider you pick.
+    </p>
+  </header>
+
+  @if (store.loading()) {
+    <div class="skeleton" aria-hidden="true">
+      @for (row of [1, 2, 3, 4]; track row) {
+        <div class="skeleton__row"></div>
+      }
+    </div>
+  } @else {
+    <form class="card" [formGroup]="form" (ngSubmit)="submit()">
+      <section class="field">
+        <label class="field__label" for="provider">AI provider</label>
+        <div class="segmented" role="radiogroup" aria-label="AI provider">
+          @for (p of providers; track p) {
+            <button
+              type="button"
+              class="segmented__option"
+              [class.is-active]="form.controls.provider.value === p"
+              (click)="form.controls.provider.setValue(p)"
+              role="radio"
+              [attr.aria-checked]="form.controls.provider.value === p"
+            >
+              {{ p === 'Fake' ? 'Demo' : p }}
+            </button>
+          }
+        </div>
+        <p class="field__hint">
+          Demo uses a scripted assistant with no key — great for exploring. Ollama runs locally.
+        </p>
+      </section>
+
+      <section class="field">
+        <label class="field__label" for="model">Model</label>
+        <input
+          id="model"
+          class="input"
+          type="text"
+          formControlName="model"
+          placeholder="e.g. claude-opus-4-8"
+        />
+      </section>
+
+      @if (needsKey) {
+        <section class="field">
+          <label class="field__label" for="apiKey">API key</label>
+          <input
+            id="apiKey"
+            class="input mono"
+            type="password"
+            formControlName="apiKey"
+            autocomplete="off"
+            [placeholder]="
+              store.settings()?.hasApiKey ? '•••••••• saved — type to replace' : 'Paste your key'
+            "
+          />
+          <p class="field__hint">
+            Stored locally and never logged. Leave blank to keep the current key.
+          </p>
+        </section>
+
+        <section class="field">
+          <label class="field__label" for="baseUrl">Base URL (optional)</label>
+          <input
+            id="baseUrl"
+            class="input mono"
+            type="text"
+            formControlName="baseUrl"
+            placeholder="Override the provider endpoint"
+          />
+        </section>
+      }
+
+      <section class="toggle">
+        <div>
+          <div class="toggle__label">Theme</div>
+          <div class="toggle__hint">Dark is the default.</div>
+        </div>
+        <div class="segmented segmented--sm">
+          <button
+            type="button"
+            class="segmented__option"
+            [class.is-active]="form.controls.theme.value === 'dark'"
+            (click)="form.controls.theme.setValue('dark')"
+          >
+            <app-icon name="dark_mode" [size]="16" /> Dark
+          </button>
+          <button
+            type="button"
+            class="segmented__option"
+            [class.is-active]="form.controls.theme.value === 'light'"
+            (click)="form.controls.theme.setValue('light')"
+          >
+            <app-icon name="light_mode" [size]="16" /> Light
+          </button>
+        </div>
+      </section>
+
+      <label class="toggle toggle--check">
+        <div>
+          <div class="toggle__label">Demo Mode</div>
+          <div class="toggle__hint">Explore the app without a real provider key.</div>
+        </div>
+        <input type="checkbox" class="switch" formControlName="demoMode" />
+      </label>
+
+      <label class="toggle toggle--check">
+        <div>
+          <div class="toggle__label">Redact contact details</div>
+          <div class="toggle__hint">
+            Strip phone, email, and address before sending to the model.
+          </div>
+        </div>
+        <input type="checkbox" class="switch" formControlName="redactPii" />
+      </label>
+
+      @if (store.error()) {
+        <p class="error" role="alert">{{ store.error() }}</p>
+      }
+
+      <div class="actions">
+        @if (saved()) {
+          <span class="saved" role="status"
+            ><app-icon name="check_circle" [size]="18" /> Saved</span
+          >
+        }
+        <button type="submit" class="btn-primary" [disabled]="store.saving()">
+          {{ store.saving() ? 'Saving…' : 'Save settings' }}
+        </button>
+      </div>
+    </form>
+  }
+</div>

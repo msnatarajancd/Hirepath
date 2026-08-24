@@ -1,0 +1,81 @@
+<div class="page">
+  <header class="page__head">
+    <h1 class="page__title">Resumes</h1>
+    <p class="page__subtitle">
+      Upload the resumes Hirepath reasons about. PDF, DOCX, or TXT, up to 10 MB. In Demo Mode the
+      parse is scripted; with a provider key it's the real thing.
+    </p>
+  </header>
+
+  <div
+    class="dropzone"
+    [class.is-dragging]="dragging()"
+    (dragover)="onDragOver($event)"
+    (dragleave)="onDragLeave()"
+    (drop)="onDrop($event)"
+  >
+    @if (store.uploading()) {
+      <app-icon name="progress_activity" [size]="28" />
+      <p>Reading and parsing your resume…</p>
+    } @else {
+      <app-icon name="upload_file" [size]="28" />
+      <p><strong>Drop a resume here</strong>, or</p>
+      <label class="btn-primary">
+        Choose a file
+        <input type="file" accept=".pdf,.docx,.txt" hidden (change)="onPick($event)" />
+      </label>
+    }
+  </div>
+
+  @if (store.error()) {
+    <p class="error" role="alert">{{ store.error() }}</p>
+  }
+
+  @if (store.loading()) {
+    <div class="skeleton" style="margin-top: 20px">
+      @for (row of [1, 2]; track row) {
+        <div class="skeleton__row"></div>
+      }
+    </div>
+  } @else if (store.isEmpty()) {
+    <div class="empty">
+      <app-icon name="description" [size]="26" />
+      <p>No resumes yet. Upload one above to get started.</p>
+    </div>
+  } @else {
+    <ul class="list">
+      @for (resume of store.resumes(); track resume.id) {
+        <li class="row">
+          <div class="row__icon"><app-icon name="description" [size]="20" /></div>
+          <div class="row__main">
+            <div class="row__title">
+              {{ resume.label }}
+              @if (resume.isDefault) {
+                <span class="badge">Default</span>
+              }
+            </div>
+            <div class="row__meta">
+              {{ resume.fileName }} · {{ formatSize(resume.sizeBytes) }} ·
+              {{ resume.skillCount }} skills
+            </div>
+          </div>
+          <div class="row__actions">
+            @if (!resume.isDefault) {
+              <button type="button" class="btn-ghost" (click)="store.setDefault(resume.id)">
+                Make default
+              </button>
+            }
+            <button
+              type="button"
+              class="icon-btn"
+              (click)="store.remove(resume.id)"
+              aria-label="Delete resume"
+            >
+              <app-icon name="delete" [size]="18" />
+            </button>
+          </div>
+        </li>
+      }
+    </ul>
+  }
+</div>

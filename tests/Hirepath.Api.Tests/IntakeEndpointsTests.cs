@@ -25,7 +25,7 @@ public sealed class IntakeEndpointsTests(HirepathApiFactory factory)
         var body = await put.Content.ReadAsStringAsync();
         body.Should().NotContain("sk-should-not-echo");
 
-        var settings = await client.GetFromJsonAsync<SettingsDto>("/api/settings");
+        var settings = await client.GetFromJsonAsync<SettingsDto>("/api/settings", TestJson.Options);
         settings!.HasApiKey.Should().BeTrue();
         settings.Provider.Should().Be(AiProvider.Anthropic);
     }

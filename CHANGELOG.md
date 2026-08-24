@@ -6,6 +6,34 @@ phases rather than semantic releases during v1 development.
 
 ## [Unreleased]
 
+### Phase 1 — Data and intake
+
+**Added**
+
+- Application layer: `Result`/`AppError` types, repository/storage/extraction
+  abstractions, a versioned prompt library, and the Settings, Profile, Resume,
+  and JobDescription use-case services (shared by REST and, later, chat tools).
+- `FakeChatClient` — a real `IChatClient` with a deterministic `DemoScript` —
+  powering Demo Mode and every test; structured-output parsing of resumes and
+  JDs against it.
+- Infrastructure: EF repositories, PdfPig/OpenXml/plain-text extractors, and
+  on-disk resume storage.
+- API endpoints: settings, profile, resumes (multipart upload), and jobs, with
+  typed `Result`→HTTP problem mapping and string-serialized enums.
+- Web: Settings screen (typed reactive form, theme sync), Resumes screen
+  (drag-and-drop upload, list, default, delete), and Job-descriptions screen
+  (paste + parse). Shared component primitives, loading/empty/error states.
+
+**Changed**
+
+- Timestamps stored as sortable `long` so SQLite can order by them; initial
+  migration regenerated. Startup migration skipped during OpenAPI doc emission.
+
+**Notes**
+
+- ADRs 0005 (SQLite ordering + DB-free doc gen) and 0006 (multipart upload via
+  HttpClient). 33 tests green (backend 22, frontend 11); e2e 6.
+
 ### Phase 0 — Foundation
 
 **Added**

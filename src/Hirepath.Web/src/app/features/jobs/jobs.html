@@ -1,0 +1,80 @@
+<div class="page">
+  <header class="page__head">
+    <h1 class="page__title">Job descriptions</h1>
+    <p class="page__subtitle">
+      Paste a posting and Hirepath pulls out the responsibilities, required skills, and the ATS
+      keywords a resume gets screened against.
+    </p>
+  </header>
+
+  <form class="card" [formGroup]="form" (ngSubmit)="submit()">
+    <div class="row-2">
+      <section class="field">
+        <label class="field__label" for="company">Company (optional)</label>
+        <input
+          id="company"
+          class="input"
+          type="text"
+          formControlName="company"
+          placeholder="e.g. Northwind"
+        />
+      </section>
+      <section class="field">
+        <label class="field__label" for="title">Title (optional)</label>
+        <input
+          id="title"
+          class="input"
+          type="text"
+          formControlName="title"
+          placeholder="e.g. Senior Engineer"
+        />
+      </section>
+    </div>
+
+    <section class="field">
+      <label class="field__label" for="rawText">Job description</label>
+      <textarea
+        id="rawText"
+        class="input textarea"
+        formControlName="rawText"
+        rows="8"
+        placeholder="Paste the full posting here…"
+      ></textarea>
+      @if (form.controls.rawText.touched && form.controls.rawText.invalid) {
+        <p class="error">Paste at least a paragraph of the posting.</p>
+      }
+    </section>
+
+    @if (store.error()) {
+      <p class="error" role="alert">{{ store.error() }}</p>
+    }
+
+    <div class="actions">
+      <button type="submit" class="btn-primary" [disabled]="store.saving()">
+        {{ store.saving() ? 'Parsing…' : 'Save & parse' }}
+      </button>
+    </div>
+  </form>
+
+  @if (store.loading()) {
+    <div class="skeleton" style="margin-top: 20px">
+      @for (row of [1, 2]; track row) {
+        <div class="skeleton__row"></div>
+      }
+    </div>
+  } @else if (!store.isEmpty()) {
+    <ul class="list">
+      @for (job of store.jobs(); track job.id) {
+        <li class="row">
+          <div class="row__icon"><app-icon name="work" [size]="20" /></div>
+          <div class="row__main">
+            <div class="row__title">{{ job.title }}</div>
+            <div class="row__meta">
+              {{ job.company || 'Unknown company' }} · {{ job.requiredSkillCount }} required skills
+            </div>
+          </div>
+        </li>
+      }
+    </ul>
+  }
+</div>

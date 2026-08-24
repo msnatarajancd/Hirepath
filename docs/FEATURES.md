@@ -9,11 +9,11 @@ The living ledger — what Hirepath does today and what's coming. Status values:
 | Design-token theming (dark + light, oklch) | Web | shipped | v1 | Phase 0 |
 | SQLite persistence + EF Core migrations | Data | shipped | v1 | Phase 0 |
 | OpenAPI + generated Angular client | Platform | shipped | v1 | Phase 0 |
-| Profile | Data | in progress | v1 | Phase 1 |
-| Resume upload + text extraction (PDF/DOCX/TXT) | Intake | in progress | v1 | Phase 1 (PdfPig, OpenXml) |
-| Job description paste + parse | Intake | in progress | v1 | Phase 1 |
-| Settings screen (provider, model, key, theme) | Web | in progress | v1 | Phase 1 |
-| FakeChatClient + Demo Mode | AI | in progress | v1 | Phase 1 |
+| Profile | Data | shipped | v1 | Phase 1 |
+| Resume upload + text extraction (PDF/DOCX/TXT) | Intake | shipped | v1 | Phase 1 (PdfPig, OpenXml) |
+| Job description paste + parse | Intake | shipped | v1 | Phase 1 |
+| Settings screen (provider, model, key, theme) | Web | shipped | v1 | Phase 1 |
+| FakeChatClient + Demo Mode | AI | shipped | v1 | Phase 1 |
 | Deterministic scoring (Skills/Exp/Domain/Seniority/ATS) | Domain | planned | v1 | Phase 2 |
 | Real providers (Anthropic / OpenAI / Ollama) | AI | planned | v1 | Phase 2 |
 | Match analysis pipeline + SSE progress | Analysis | planned | v1 | Phase 2 |

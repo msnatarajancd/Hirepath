@@ -18,7 +18,9 @@ public static class JobEndpoints
                 Guid id, JobDescriptionService service, CancellationToken ct) =>
                 (await service.GetAsync(id, ct)).ToHttp())
             .WithName("GetJob")
-            .WithSummary("One job description with its parse.");
+            .WithSummary("One job description with its parse.")
+            .Produces<JobDetailDto>()
+            .ProducesProblem(StatusCodes.Status404NotFound);
 
         group.MapPost("/", async (
                 CreateJobRequest request,
@@ -26,7 +28,9 @@ public static class JobEndpoints
                 CancellationToken ct) =>
                 (await service.CreateAsync(request, ct)).ToHttp())
             .WithName("CreateJob")
-            .WithSummary("Create a job description from pasted text.");
+            .WithSummary("Create a job description from pasted text.")
+            .Produces<JobDetailDto>()
+            .ProducesProblem(StatusCodes.Status400BadRequest);
 
         group.MapPut("/{id:guid}/parsed", async (
                 Guid id,
@@ -35,7 +39,9 @@ public static class JobEndpoints
                 CancellationToken ct) =>
                 (await service.UpdateParsedAsync(id, parsed, ct)).ToHttp())
             .WithName("UpdateJobParsed")
-            .WithSummary("Save a user-corrected JD parse.");
+            .WithSummary("Save a user-corrected JD parse.")
+            .Produces<JobDetailDto>()
+            .ProducesProblem(StatusCodes.Status404NotFound);
 
         return app;
     }

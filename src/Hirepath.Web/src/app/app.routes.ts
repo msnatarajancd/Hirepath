@@ -24,22 +24,17 @@ export const routes: Routes = [
   {
     path: 'resumes',
     title: 'Resumes · Hirepath',
-    loadComponent: () => import('./shared/ui/page-placeholder').then((m) => m.PagePlaceholder),
-    data: {
-      icon: 'description',
-      title: 'Your resumes',
-      subtitle: 'Upload and manage the resumes Hirepath reasons about.',
-    },
+    loadComponent: () => import('./features/resume/resumes').then((m) => m.Resumes),
+  },
+  {
+    path: 'jobs',
+    title: 'Job descriptions · Hirepath',
+    loadComponent: () => import('./features/jobs/jobs').then((m) => m.Jobs),
   },
   {
     path: 'settings',
     title: 'Settings · Hirepath',
-    loadComponent: () => import('./shared/ui/page-placeholder').then((m) => m.PagePlaceholder),
-    data: {
-      icon: 'settings',
-      title: 'Settings',
-      subtitle: 'Choose your AI provider, model, and theme.',
-    },
+    loadComponent: () => import('./features/settings/settings').then((m) => m.Settings),
   },
   { path: '**', redirectTo: 'chat' },
 ];
