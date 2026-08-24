@@ -6,6 +6,7 @@ using Hirepath.Domain.Profiles;
 using Hirepath.Domain.Resumes;
 using Hirepath.Domain.Settings;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Hirepath.Infrastructure.Persistence;
 
@@ -28,6 +29,15 @@ public sealed class HirepathDbContext(DbContextOptions<HirepathDbContext> option
     {
         modelBuilder.ApplyConfigurationsFromAssembly(typeof(HirepathDbContext).Assembly);
         base.OnModelCreating(modelBuilder);
+    }
+
+    protected override void ConfigureConventions(ModelConfigurationBuilder configurationBuilder)
+    {
+        // SQLite cannot ORDER BY a DateTimeOffset stored as TEXT. Store it as a
+        // sortable long (all our timestamps are UTC) so ordering works in SQL.
+        configurationBuilder.Properties<DateTimeOffset>()
+            .HaveConversion<DateTimeOffsetToBinaryConverter>();
+        base.ConfigureConventions(configurationBuilder);
     }
 
     public override int SaveChanges()

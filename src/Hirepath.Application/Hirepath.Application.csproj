@@ -10,4 +10,9 @@
     <PackageReference Include="Microsoft.Extensions.AI" />
   </ItemGroup>
 
+  <!-- Prompts are versioned files, loaded at runtime as embedded resources. -->
+  <ItemGroup>
+    <EmbeddedResource Include="Prompts\*.md" />
+  </ItemGroup>
+
 </Project>

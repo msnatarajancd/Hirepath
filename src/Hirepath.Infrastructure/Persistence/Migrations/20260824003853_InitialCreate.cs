@@ -28,8 +28,8 @@ namespace Hirepath.Infrastructure.Persistence.Migrations
                     Deterministic = table.Column<string>(type: "TEXT", nullable: false),
                     ModelId = table.Column<string>(type: "TEXT", maxLength: 200, nullable: true),
                     PromptVersion = table.Column<string>(type: "TEXT", maxLength: 80, nullable: true),
-                    CreatedAt = table.Column<DateTimeOffset>(type: "TEXT", nullable: false),
-                    UpdatedAt = table.Column<DateTimeOffset>(type: "TEXT", nullable: false)
+                    CreatedAt = table.Column<long>(type: "INTEGER", nullable: false),
+                    UpdatedAt = table.Column<long>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -48,8 +48,8 @@ namespace Hirepath.Infrastructure.Persistence.Migrations
                     Seniority = table.Column<string>(type: "TEXT", nullable: false),
                     RawText = table.Column<string>(type: "TEXT", nullable: false),
                     Parsed = table.Column<string>(type: "TEXT", nullable: true),
-                    CreatedAt = table.Column<DateTimeOffset>(type: "TEXT", nullable: false),
-                    UpdatedAt = table.Column<DateTimeOffset>(type: "TEXT", nullable: false)
+                    CreatedAt = table.Column<long>(type: "INTEGER", nullable: false),
+                    UpdatedAt = table.Column<long>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -68,8 +68,8 @@ namespace Hirepath.Infrastructure.Persistence.Migrations
                     Seniority = table.Column<string>(type: "TEXT", nullable: false),
                     TargetRoles = table.Column<string>(type: "TEXT", nullable: false),
                     Links = table.Column<string>(type: "TEXT", nullable: false),
-                    CreatedAt = table.Column<DateTimeOffset>(type: "TEXT", nullable: false),
-                    UpdatedAt = table.Column<DateTimeOffset>(type: "TEXT", nullable: false)
+                    CreatedAt = table.Column<long>(type: "INTEGER", nullable: false),
+                    UpdatedAt = table.Column<long>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -89,8 +89,8 @@ namespace Hirepath.Infrastructure.Persistence.Migrations
                     ExtractedText = table.Column<string>(type: "TEXT", nullable: false),
                     Parsed = table.Column<string>(type: "TEXT", nullable: true),
                     IsDefault = table.Column<bool>(type: "INTEGER", nullable: false),
-                    CreatedAt = table.Column<DateTimeOffset>(type: "TEXT", nullable: false),
-                    UpdatedAt = table.Column<DateTimeOffset>(type: "TEXT", nullable: false)
+                    CreatedAt = table.Column<long>(type: "INTEGER", nullable: false),
+                    UpdatedAt = table.Column<long>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -109,8 +109,8 @@ namespace Hirepath.Infrastructure.Persistence.Migrations
                     Theme = table.Column<string>(type: "TEXT", maxLength: 20, nullable: false),
                     DemoMode = table.Column<bool>(type: "INTEGER", nullable: false),
                     RedactPii = table.Column<bool>(type: "INTEGER", nullable: false),
-                    CreatedAt = table.Column<DateTimeOffset>(type: "TEXT", nullable: false),
-                    UpdatedAt = table.Column<DateTimeOffset>(type: "TEXT", nullable: false)
+                    CreatedAt = table.Column<long>(type: "INTEGER", nullable: false),
+                    UpdatedAt = table.Column<long>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -126,8 +126,8 @@ namespace Hirepath.Infrastructure.Persistence.Migrations
                     PinnedResumeId = table.Column<Guid>(type: "TEXT", nullable: true),
                     PinnedJobDescriptionId = table.Column<Guid>(type: "TEXT", nullable: true),
                     PinnedAnalysisId = table.Column<Guid>(type: "TEXT", nullable: true),
-                    CreatedAt = table.Column<DateTimeOffset>(type: "TEXT", nullable: false),
-                    UpdatedAt = table.Column<DateTimeOffset>(type: "TEXT", nullable: false)
+                    CreatedAt = table.Column<long>(type: "INTEGER", nullable: false),
+                    UpdatedAt = table.Column<long>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -145,8 +145,8 @@ namespace Hirepath.Infrastructure.Persistence.Migrations
                     Sequence = table.Column<int>(type: "INTEGER", nullable: false),
                     ToolCalls = table.Column<string>(type: "TEXT", nullable: false),
                     Widgets = table.Column<string>(type: "TEXT", nullable: false),
-                    CreatedAt = table.Column<DateTimeOffset>(type: "TEXT", nullable: false),
-                    UpdatedAt = table.Column<DateTimeOffset>(type: "TEXT", nullable: false)
+                    CreatedAt = table.Column<long>(type: "INTEGER", nullable: false),
+                    UpdatedAt = table.Column<long>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
