@@ -1,0 +1,32 @@
+{
+  "name": "Hirepath",
+  "image": "mcr.microsoft.com/devcontainers/base:ubuntu-24.04",
+  "features": {
+    "ghcr.io/devcontainers/features/dotnet:2": {
+      "version": "10.0"
+    },
+    "ghcr.io/devcontainers/features/node:1": {
+      "version": "24"
+    }
+  },
+  "forwardPorts": [7180, 4200],
+  "portsAttributes": {
+    "7180": { "label": "API (https)" },
+    "4200": { "label": "Web (Angular dev server)" }
+  },
+  "containerEnv": {
+    "HIREPATH_DATA_ROOT": "${containerWorkspaceFolder}/.devdata"
+  },
+  "postCreateCommand": "dotnet tool restore && dotnet restore Hirepath.slnx && npm --prefix src/Hirepath.Web install && npm --prefix tests/Hirepath.E2E install",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-dotnettools.csdevkit",
+        "angular.ng-template",
+        "dbaeumer.vscode-eslint",
+        "esbenp.prettier-vscode",
+        "editorconfig.editorconfig"
+      ]
+    }
+  }
+}

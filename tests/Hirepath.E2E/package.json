@@ -1,0 +1,14 @@
+{
+  "name": "hirepath-e2e",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Playwright end-to-end tests, run in Demo Mode.",
+  "scripts": {
+    "test": "playwright test",
+    "test:install": "playwright install chromium",
+    "report": "playwright show-report"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.50.0"
+  }
+}
