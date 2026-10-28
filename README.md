@@ -114,6 +114,22 @@ tests/
 docs/                      FEATURES · ROADMAP · ARCHITECTURE · decisions (ADRs)
 ```
 
+## How this was built
+
+Hirepath is built **with AI coding agents, deliberately and in the open**. I
+wrote the product and engineering specification,
+[`BUILD_PROMPT.md`](BUILD_PROMPT.md): the stack, the architecture and dependency
+rules, the testing strategy, the phased build order with exit criteria, and the
+verification gates every phase must pass. An agent implemented each phase
+against that spec, and I reviewed the output, ran the gates, and made the calls
+recorded in the [ADRs](docs/decisions/) and
+[phase reports](docs/phase-reports/).
+
+The repo is set up so this workflow is repeatable and auditable:
+[`AGENTS.md`](AGENTS.md) is the operating manual any human or tool follows,
+`./verify.ps1` runs every gate, and each phase lands as its own commit with
+updated docs.
+
 ## Working in this repo
 
 Read [`AGENTS.md`](AGENTS.md) — commands, conventions, the dependency rule, and
