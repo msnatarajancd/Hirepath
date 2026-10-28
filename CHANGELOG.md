@@ -6,6 +6,18 @@ phases rather than semantic releases during v1 development.
 
 ## [Unreleased]
 
+### Repository
+
+**Fixed**
+
+- `.gitignore` `storage/` rule matched `src/Hirepath.Infrastructure/Storage/` on
+  case-insensitive file systems, so two source files were never committed and a
+  fresh clone failed to build. Anchored to `/storage/`.
+
+**Added**
+
+- MIT `LICENSE`; README status, screenshots, and highlights updated.
+
 ### Phase 1 — Data and intake
 
 **Added**

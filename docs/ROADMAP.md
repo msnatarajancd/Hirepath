@@ -11,7 +11,7 @@ generated client, and the Angular shell rendering the conversation layout.
 
 **Exit:** app runs, looks good, does nothing yet. All gates green.
 
-## Phase 1 — Data and intake
+## Phase 1 — Data and intake ✅
 
 Profile, resume upload, document text extraction (PdfPig / OpenXml), JD paste,
 persistence, settings screen, and `FakeChatClient` + Demo Mode. Resume/JD
